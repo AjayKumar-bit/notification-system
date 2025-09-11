@@ -10,3 +10,18 @@ export const  getDeviceToken= async()=> {
 	}
  
 }
+
+export const listenNotification=(callback:any)=>{
+	messaging().onMessage(async remoteMessage => {
+		console.log('FCM Message Data:', remoteMessage.data);
+		callback(remoteMessage)
+	});
+}
+
+export const listenBackgoundNotification=(callback:any)=>{
+	messaging().setBackgroundMessageHandler(async remoteMessage => {
+		console.log('Message handled in the background!', remoteMessage);
+		callback(remoteMessage)
+	});
+	
+}
